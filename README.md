@@ -45,7 +45,7 @@ R scripts containing plotting parameters such as colors, ggplot2 themes, etc. as
 
 #### Whole-genome assembly, quality control, and annotation of the *Lj*-SPHERE core culture collection
 
-Raw sequencing data (FASTQ files) from the core *Lj*-SPHERE culture collection as well as assemblies (FNA files), nucleotide ORFs (FFN), amino acid ORFs (FAA), GFF files, KEGG annotations (KO), reference *16S* rRNA sequences, AMPHORA marker gene alignments, and metadata (used for Fig. 5) can be downloaded in bulk [here](http://www.at-sphere.com/ljsphere/LjSPHERE.tar.gz).
+Raw sequencing data (FASTQ files) from the core *Lj*-SPHERE culture collection as well as assemblies (FNA files), nucleotide ORFs (FFN), amino acid ORFs (FAA), GFF files, KEGG annotations (KO), reference *16S* rRNA sequences, AMPHORA marker gene alignments, and metadata (used for Fig. 5) can be downloaded in bulk [here](http://www.at-sphere.com/ljsphere/LjAt_WGS.tar.gz).
 
 [assembly.functions.sh](https://github.com/garridoo/ljsphere/blob/master/assembly.functions.sh): bash script containing auxiliary functions for whole-genome assembly.
 
@@ -59,7 +59,7 @@ Raw sequencing data (FASTQ files) from the core *Lj*-SPHERE culture collection a
 
 #### Reference-based analysis of *16S* rRNA amplicon data from SynCom experiments
 
-Raw sequencing data from all SynCom experiments (FASTQ files and mapping files including barcodes, biological and technical metadata, etc.) along with intermediate results (ASV tables, etc.) can be downloaded [here](http://www.at-sphere.com/ljphere/LjAT_SC.tar.gz).
+Raw sequencing data from all SynCom experiments (FASTQ files and mapping files including barcodes, biological and technical metadata, etc.) along with intermediate results (ASV tables, etc.) can be downloaded [here](http://www.at-sphere.com/ljphere/LjAt_SC.tar.gz).
 
 The experiments reported in the paper correspond to independent Illumina MiSeq sequencing runs as follows:
 
