@@ -4,7 +4,7 @@ correspondence to Ruben Garrido-Oter
 
 garridoo@mpipz.mpg.de
 
-These scripts are made available to facilitate the reproducibility of our research. If you re-use any or part of this code, please reference with comments and cite our paper. Raw data and intermediate results necessary to run these scripts can also be downloaded [here](http://www.mpipz.mpg.de/R_scripts).
+These scripts are made available to facilitate the reproducibility of our research. If you re-use any or part of this code, please reference with comments and cite our paper. Raw data and intermediate results necessary to run these scripts can also be downloaded [here](http://www.mpipz.mpg.de/scripts).
 
 ---------------------------
 
