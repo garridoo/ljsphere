@@ -12,8 +12,8 @@ library("Biostrings")
 
 # load plotting functions
 
-source("plotting_parameters.R")
 source("plotting_functions.R")
+source("plotting_parameters.R")
 
 # directories
 

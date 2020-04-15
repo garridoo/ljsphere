@@ -19,8 +19,8 @@ options(warn=-1)
 
 # plotting stuff
 
-source("plotting_parameters.R")
 source("plotting_functions.R")
+source("plotting_parameters.R")
 
 # paths to files
 

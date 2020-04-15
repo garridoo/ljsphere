@@ -10,8 +10,8 @@ rm(list=ls())
 
 # load plotting functions
 
-source("plotting_parameters.R")
 source("plotting_functions.R")
+source("plotting_parameters.R")
 source("cpcoa.func.R")
 
 # load plotting functions
