@@ -1,7 +1,4 @@
 
-# originally by Ruben Garrido-Oter
-# garridoo@mpipz.mpg.de
-
 library(ape)
 library(ggplot2)
 library(reshape)

@@ -1,7 +1,4 @@
 
-# originally by Ruben Garrido-Oter
-# garridoo@mpipz.mpg.de
-
 pcoa_width <- 8
 pcoa_height <- 6
 pcoa_size <- 2
@@ -25,6 +22,9 @@ at_color <- "#f8766c"
 lj_color <- "#00bfc4"
 lj_mutant_color <- "#8aaeb6"
 soil_color <- "#654321"
+al_color <- "#9F0011"
+lc_color <- "#8aaeb6"
+lc_color <- "#2a2aff"
 
 root_shape <- 19
 rhizosphere_shape <- 3

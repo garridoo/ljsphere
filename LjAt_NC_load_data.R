@@ -13,24 +13,30 @@ library("vegan")
 
 source("plotting_functions.R")
 source("plotting_parameters.R")
-
-# directories
-
-results.dir <- "/project_folder/LjAt_NC/results/"
-data.dir <- "/project_folder/LjAt_NC/data/"
-figures.dir <- "/project_folder/figures/"
+source("cpcoa.func.R")
+source("paths.R")
 
 # files
 
-design.file <- paste(data.dir, "design.txt", sep="")
-otu_table.file <- paste(results.dir, "ASV_table_rarefied_1000.txt", sep="")
-taxonomy.file <- paste(results.dir, "ASV_taxonomy_rdp.txt", sep="")
+design.file <- paste(data.dir, "LjAt_NC_design.txt", sep="")
+otu_table.file <- paste(results.dir, "LjAt_NC_ASV_table.txt", sep="")
+taxonomy.file <- paste(results.dir, "LjAt_NC_taxonomy.txt", sep="")
 
 # load data
 
 design <- read.table(design.file, header=T, sep="\t")
 otu_table <- read.table(otu_table.file, sep="\t", header=T, check.names=F)
 taxonomy <- read.table(taxonomy.file, sep="\t", header=T, check.names=F)
+
+# treat the order Burkholderiales (formerly Proteobacteriales) as Proteobacteria (Class)
+
+taxonomy$Class <- as.character(taxonomy$Class)
+idx <- taxonomy$Order=="Burkholderiales"
+taxonomy$Class[idx] <- "Betaproteobacteria"
+
+# rarefy ASV table
+
+otu_table_raref <- rrarefy(otu_table, sample=1000)
 
 # re-order data matrices
 
@@ -39,6 +45,7 @@ design <- design[idx, ]
 
 idx <- match(design$Original.SampleID, colnames(otu_table))
 otu_table <- otu_table[, idx]
+otu_table_raref <- otu_table_raref[, idx]
 
 colnames(otu_table) <- design$SampleID
 

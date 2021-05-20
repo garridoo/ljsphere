@@ -13,6 +13,7 @@ rm(list=ls())
 source("plotting_functions.R")
 source("plotting_parameters.R")
 source("cpcoa.func.R")
+source("paths.R")
 
 # load plotting functions
 
@@ -23,19 +24,13 @@ library("vegan")
 
 # process independently a given experiment (run)
 
-run <- "LjAt_006"
-
-# directories
-
-results.dir <- paste("/project_folder/LjAt_SC/", run, "/", sep="")
-data.dir <- "/project_folder/LjAt_SC/data/"
-figures.dir <- "/project_folder/figures/"
+run <- "LjAt_010"
 
 # files
 
 design.file <- paste(data.dir, run, "_design.txt", sep="")
-otu_table.file <- paste(results.dir, "otu_table.txt", sep="")
-otu_table_unfiltered.file <- paste(results.dir, "otu_table_unfiltered.txt", sep="")
+otu_table.file <- paste(results.dir, run, "_otu_table.txt", sep="")
+otu_table_unfiltered.file <- paste(results.dir, run, "_otu_table_unfiltered.txt", sep="")
 taxonomy.file <- paste(data.dir, run, "_taxonomy.txt", sep="")
 
 # load data
@@ -83,8 +78,8 @@ design$at_strains_ra <- colSums(otu_table[rownames(otu_table) %in% at_strains, ]
 
 # subset samples of interest
  
-idx <- design$genotype %in% c("col0", "gifu", "nfr5", "soil", "deps", "cyp79b2b3", "Atbbc", "Atfls2", "Ljfls2") & 
-       design$compartment %in% c("root", "rhizosphere", "soil") &
+idx <- design$genotype %in% c("col0", "gifu", "nfr5", "soil", "deps", "cyp79b2b3", "Atbbc", "Atfls2", "Ljfls2", "MN47", "Lc", "wood") & 
+       design$compartment %in% c("root", "rhizosphere", "soil", "deadroot", "wood", "droplet") &
        TRUE
 
 design <- design[idx, ]
@@ -93,11 +88,11 @@ otu_table_unfiltered <- otu_table_unfiltered[, idx]
 
 ### beta diversity
 
-colors <- data.frame(group=c("col0",    "gifu",    "nfr5",    "soil",    "deps",    "cyp79b2b3", "Atbbc",    "Atfls2",  "Ljfls2"),
-                     color=c("#f8756b", "#00b8e3", "#1d5966", "#654321", "#d48079", "#845753",   "#845753",  "#d48079", "#8aaeb6"))
+colors <- data.frame(group=c("col0",    "gifu",    "nfr5",    "soil",    "deps",    "cyp79b2b3", "Atbbc",    "Atfls2",  "Ljfls2", "MN47", "Lc", "wood", "input"),
+                     color=c("#f8756b", "#00b8e3", "#1d5966", "#654321", "#d48079", "#845753",   "#845753",  "#d48079", "#8aaeb6", al_color, lc_color, "brown", "black"))
 
-shapes <- data.frame(group=c("root", "soil", "rhizosphere"),
-                     shape=c(root_shape, soil_shape, rhizosphere_shape))
+shapes <- data.frame(group=c("root", "soil", "rhizosphere", "deadroot", "wood", "droplet", "input"),
+                     shape=c(root_shape, soil_shape, rhizosphere_shape, 16, 16, 7, 17))
 
 # PCoA Bray-Curtis
 

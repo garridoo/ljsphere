@@ -10,13 +10,9 @@ rm(list=ls())
 
 # load data
 
-source("AtLj_NC_load_data.R")
+source("LjAt_NC_load_data.R")
 
 # plot PCoA of Bray-Curtis
 
-source("AtLj_NC_diversity.R")
-
-# rank-abundance plots
-
-source("AtLj_NC_rank.R")
+source("LjAt_NC_diversity.R")
 

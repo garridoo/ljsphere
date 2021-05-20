@@ -18,6 +18,10 @@ full <- read.table(paste(results.dir, "hpi_004_fullSC.txt", sep=""), header=T, s
 atlj <- read.table(paste(results.dir, "hpi_004_At_Lj.txt", sep=""), header=T, sep="\t")
 ljat <- read.table(paste(results.dir, "hpi_004_Lj_At.txt", sep=""), header=T, sep="\t")
 
+full <- read.table(paste(results.dir, "hpi_004_rhizosphere_fullSC.txt", sep=""), header=T, sep="\t")
+atlj <- read.table(paste(results.dir, "hpi_004_rhizosphere_At_Lj.txt", sep=""), header=T, sep="\t")
+ljat <- read.table(paste(results.dir, "hpi_004_rhizosphere_Lj_At.txt", sep=""), header=T, sep="\t")
+
 idx <- full$host=="At"
 at_strains <- data.frame(full[idx, c(1, 2, 3, 5, 8)], invasion=atlj$hpi_ratio[idx])
 

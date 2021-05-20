@@ -10,7 +10,7 @@ rm(list=ls())
 
 # process independently a given experiment (run)
 
-run <- "LjAt_006"
+run <- "LjAt_010"
 
 source("LjAt_SC_load_data.R")
 
@@ -39,9 +39,9 @@ df$family_strain <- paste(df$family, " (", df$strain, ")", sep="")
 
 df$RA_log <- log10(df$RA * 1000 + 1)
 
-colors <- data.frame(group=c("col0",    "gifu",    "nfr5",    "soil",    "deps",    "cyp79b2b3", "Atbbc",    "Atfls2",  "Ljfls2"),
-                     color=c("#f8756b", "#00b8e3", "#1d5966", "#654321", "#d48079", "#845753",   "#845753",  "#d48079", "#8aaeb6"))
-                             
+colors <- data.frame(group=c("col0",    "gifu",    "nfr5",    "soil",    "deps",    "cyp79b2b3", "Atbbc",    "Atfls2",  "Ljfls2", "MN47", "Lc", "wood"),
+                    color=c("#f8756b", "#00b8e3", "#1d5966", "#654321", "#d48079", "#845753",   "#845753",  "#d48079", "#8aaeb6", al_color, lc_color, "brown"))
+
 fmt_dcimals <- function(decimals=0) {
     function(x) format(x, nsmall=decimals, scientific=F)
 }
@@ -67,7 +67,7 @@ if (dim(df_family_at)[1] > 0 & dim(df_family_lj)[1] > 0) {
 
     lim_padding <- 0.2
 
-    idx <- df_family_at$treatment %in% c("col0", "gifu")
+    idx <- df_family_at$treatment %in% c("col0", "gifu", "Atbbc", "Atfls2", "Ljfls2")
     lim <- mean(df_family_at$RA[idx])
     h_lim <- min(1, lim+lim_padding)
     l_lim <- max(0, lim-lim_padding)
@@ -88,7 +88,7 @@ if (dim(df_family_at)[1] > 0 & dim(df_family_lj)[1] > 0) {
                 main_theme +
                 theme(legend.position="none")
 
-    idx <- df_family_at$treatment %in% c("col0", "gifu")
+    idx <- df_family_lj$treatment %in% c("col0", "gifu", "Atbbc", "Atfls2", "Ljfls2")
     lim <- mean(df_family_lj$RA[idx])
     h_lim <- min(1, lim+lim_padding)
     l_lim <- max(0, lim-lim_padding)

@@ -16,17 +16,16 @@ Raw *16S* rRNA amplicon reads were deposited in the European Nucleotide Archive 
 
 #### Analysis of culture independent and IRL *16S* rRNA amplicon data
 
-Raw data corresponding to the natural community greenhouse experiments with *Lotus* and *Arabidopsis* data (Zgadzaj *et al.*, 2019; Harbort *et al.*, 2020) along with intermediate results (ASV table, metadata, etc.) can be found [here](http://www.at-sphere.com/ljsphere/LjAt_NC.tar.gz).
+Raw data corresponding to the natural community greenhouse experiments with *Lotus* and *Arabidopsis* data, along with intermediate results (ASV table, metadata, etc.) can be found [here](http://www.at-sphere.com/ljsphere/LjAt_NC.tar.gz).
 
 [LjAt_NC_config.sh](https://github.com/garridoo/ljsphere/blob/master/LjAt_NC_config.sh) and
 [LjAt_NC.sh](https://github.com/garridoo/ljsphere/blob/master/LjAt_NC.sh):
 bash pipeline to pre-process raw sequencing amplicon data from the greenhouse experiments and obtain an ASV table.
 
 [LjAt_NC.R](https://github.com/garridoo/ljsphere/blob/master/LjAt_NC.R),
-[LjAt_NC_load_data.R](https://github.com/garridoo/ljsphere/blob/master/LjAt_NC_load_data.R),
-[LjAt_NC_diversity.R](https://github.com/garridoo/ljsphere/blob/master/LjAt_NC_diversity.R), and
-[LjAt_NC_rank.R](https://github.com/garridoo/ljsphere/blob/master/LjAt_NC_rank.R)
-R script to process the natural community ASV table and perform downstream analysis of alpha- and beta-diversity as well as rank-abundance plots and enrichment tests (Fig. 1a-b; Fig. S1).
+[LjAt_NC_load_data.R](https://github.com/garridoo/ljsphere/blob/master/LjAt_NC_load_data.R), and
+[LjAt_NC_diversity.R](https://github.com/garridoo/ljsphere/blob/master/LjAt_NC_diversity.R):
+R scripts to process the natural community ASV table and perform downstream analysis of alpha- and beta-diversity as well as rank-abundance plots and enrichment tests (Fig. 1a-b).
 
 Raw sequencing data and intermediate results from the *At*-IRL and *Lj*-IRL as well as corresponding natural community inocula can be downloaded [here](http://www.at-sphere.com/ljsphere/LjAt_IRL.tar.gz).
 
@@ -45,7 +44,7 @@ R scripts containing plotting parameters such as colors, ggplot2 themes, etc. as
 
 #### Whole-genome assembly, quality control, and annotation of the *Lj*-SPHERE core culture collection
 
-Raw sequencing data (FASTQ files) from the core *Lj*-SPHERE culture collection as well as assemblies (FNA files), nucleotide ORFs (FFN), amino acid ORFs (FAA), GFF files, KEGG annotations (KO), reference *16S* rRNA sequences, AMPHORA marker gene alignments, and metadata (used for Fig. 5) can be downloaded in bulk [here](http://www.at-sphere.com/ljsphere/LjAt_WGS.tar.gz).
+Raw sequencing data (FASTQ files) from the core *Lj*-SPHERE culture collection as well as assemblies (FNA files), nucleotide ORFs (FFN), amino acid ORFs (FAA), GFF files, KEGG annotations (KO), reference *16S* rRNA sequences, AMPHORA marker gene alignments, and metadata (used for Fig. S4) can be downloaded in bulk [here](http://www.at-sphere.com/ljsphere/LjAt_WGS.tar.gz).
 
 [assembly.functions.sh](https://github.com/garridoo/ljsphere/blob/master/assembly.functions.sh): bash script containing auxiliary functions for whole-genome assembly.
 
@@ -65,29 +64,33 @@ The experiments reported in the paper correspond to independent Illumina MiSeq s
 
 | Sequencing run | Experiment ID            |
 | -------------- |--------------------------|
-| AtLj_001        | SynCom experiment A      |
+| AtLj_001        | SynCom experiment C      |
 | AtLj_002        | SynCom experiment B      |
-| AtLj_003        | SynCom experiment D      |
-| AtLj_004        | SynCom experiment F      |
-| AtLj_005        | SynCom experiment E      |
-| AtLj_006        | SynCom experiment C      |
-| MDA10           | Millifluidics experiment (G) |
+| AtLj_003        | SynCom experiment G      |
+| AtLj_004        | SynCom experiment L      |
+| AtLj_005        | SynCom experiment H      |
+| AtLj_006        | SynCom experiment D      |
+| AtLj_007        | SynCom experiment F      |
+| AtLj_008        | SynCom experiment J      |
+| AtLj_009        | SynCom experiment A      |
+| AtLj_010        | SynCom experiment M      |
+| MDA10           | Millifluidics experiment (I) |
 
 [LjAt_SC_load_data.R](https://github.com/garridoo/ljsphere/blob/master/LjAt_SC_load_data.R): R script used to load data and metadata from the SynCom competition experiments.
 
 [LjAt_SC_diversity.R](https://github.com/garridoo/ljsphere/blob/master/LjAt_SC_diversity.R) and
-[cpcoa.func.R](https://github.com/garridoo/ljsphere/blob/master/cpcoa.func.R): R scripts employed for beta-diversity analysis, dimensionality reduction, and permutation analyses of variance (Figs. 3B-D, and 4B).
+[cpcoa.func.R](https://github.com/garridoo/ljsphere/blob/master/cpcoa.func.R): R scripts employed for beta-diversity analysis, dimensionality reduction, and permutation analyses of variance (Figs. 2b-d, 4b-c, S5a-c, S9, S10a, S10c, S11a, S12a).
 
-[LjAt_SC_host_preference.R](https://github.com/garridoo/ljsphere/blob/master/LjAt_SC_host_preference.R): script used for plotting host preference boxplots from competition experiments (Fig. 3E-G).
+[LjAt_SC_host_preference.R](https://github.com/garridoo/ljsphere/blob/master/LjAt_SC_host_preference.R): script used for plotting host preference boxplots from competition experiments (Figs. 2e-g, S5c-e, S10b, S10d, S11b, S12b).
 
 [LjAt_SC_invasion_load_data.R](https://github.com/garridoo/ljsphere/blob/master/LjAt_SC_invasion_load_data.R): R script used to load data and metadata from the invasion and persistence experiment.
 
-[LjAt_SC_invasion.R](https://github.com/garridoo/ljsphere/blob/master/LjAt_SC_invasion.R): R script used for plotting host preference boxplots from the invasion and persistence experiment (Fig. 4D-E).
+[LjAt_SC_invasion.R](https://github.com/garridoo/ljsphere/blob/master/LjAt_SC_invasion.R): R script used for plotting host preference boxplots from the invasion and persistence experiment (Fig. 4d-e).
 
 [hpi.R](https://github.com/garridoo/ljsphere/blob/master/hpi.R), and
 [hpi_invasion.R](https://github.com/garridoo/ljsphere/blob/master/hpi_invasion.R): R scripts used to calculate host preference and invasiveness indices (Fig. 5).
 
-[LjAt_MDA_diversity.R](https://github.com/garridoo/ljsphere/blob/master/LjAt_SC_diversity.R): R script used for beta-diversity analysis, dimensionality reduction, and permutation analyses of variance of *in vitro* millifluidics experiments (Fig. S4).
+[LjAt_MDA_diversity.R](https://github.com/garridoo/ljsphere/blob/master/LjAt_SC_diversity.R): R script used for beta-diversity analysis, dimensionality reduction, and permutation analyses of variance of *in vitro* millifluidics experiments (Fig. S12a).
 
 ---------------------------
 

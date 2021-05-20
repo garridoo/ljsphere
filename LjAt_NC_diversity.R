@@ -4,11 +4,17 @@
 
 # subset samples of interest
 
-idx <- design$Study %in% c("zgadzaj_2018", "masayoshi_2016") &
-       design$Soil.Batch %in% c("CAS", "CAS10", "CAS11b") &
-       T
+idx <- design$Study %in% c("wippel_2020") &
+      design$Soil.Batch %in% c("CAS", "CAS10", "CAS11b", "CAS14") &
+      design$Description %in% c("Day36") &
+      design$Compartment %in% c("root", "soil", "rhizosphere") &
+      design$Host.Species %in% c("arabidopsis_thaliana", "lotus_japonicus", "host_soil") &
+      design$depth >= 1000 &
+      T  
+   
 design_subset <- design[idx, ]
 otu_table_subset <- otu_table[, idx]
+otu_table_raref_subset <- otu_table_raref[, idx]
 
 # add a new column to design with nodulation phenotype
 
@@ -24,8 +30,8 @@ design_subset$nodulation[design_subset$Host.Genotype %in% nod_minus] <- "Lj (Nod
 colors <- data.frame(group=c("host_soil", "arabidopsis_thaliana", "lotus_japonicus"),
                      color=c(soil_color, at_color, lj_color))
 
-shapes <- data.frame(group=c("root", "soil"),
-                     shape=c(root_shape, soil_shape))
+shapes <- data.frame(group=c("root", "soil", "rhizosphere", "phycosphere"),
+                     shape=c(root_shape, soil_shape, rhizosphere_shape, 11))
 
 # PCoA Bray-Curtis
 
@@ -60,75 +66,17 @@ p <- ggplot(points, aes(x=x, y=y, color=Host.Species, shape=Compartment)) +
 
 ggsave(paste(figures.dir, "AtLj_NC_PCoA.pdf", sep=""), p, width=pcoa_width, height=pcoa_height)
 
-### CPCoA analysis
-
-colors_cpcoa <- data.frame(group=c("Soil", "At", "Lj (Nod+)", "Lj (Nod-)"),
-                     color=c(soil_color, at_color, lj_color, lj_mutant_color))
-
-shapes_cpcoa <- data.frame(group=c("root", "soil"),
-                     shape=c(root_shape, soil_shape))
-
-sqrt_transform <- T
-
-design_root <- design_subset[design_subset$Compartment=="root", ]
-otu_table_root <- otu_table_subset[, colnames(otu_table_subset) %in% design_root$SampleID]
-
-bray_curtis_root <- vegdist(t(otu_table_root), method="bray")
-
-capscale.gen <- capscale(bray_curtis_root ~ nodulation, data=design_root, add=F, sqrt.dist=sqrt_transform)
-
-# ANOVA-like permutation analysis
-
-perm_anova.gen <- anova.cca(capscale.gen)
-print(perm_anova.gen)
-                                                    
-# generate variability tables and calculate confidence intervals for the variance
-
-var_tbl.gen <- variability_table(capscale.gen)
-
-eig <- capscale.gen$CCA$eig
-
-variance <- capscale.gen$CCA$tot.chi / capscale.gen$tot.chi
-
-variance <- var_tbl.gen["constrained", "proportion"]
-p.val <- perm_anova.gen[1, 4]
-
-points_cpcoa <- capscale.gen$CCA$wa[, 1:2]
-colnames(points_cpcoa) <- c("x", "y")
-
-points_cpcoa <- cbind(points_cpcoa, design_subset[match(rownames(points_cpcoa), design_subset$SampleID), ])
-
-colors_cpcoa <- colors_cpcoa[colors_cpcoa$group %in% points_cpcoa$nodulation, ]
-points_cpcoa$nodulation <- factor(points_cpcoa$nodulation, levels=colors_cpcoa$group)
-
-shapes_cpcoa <- shapes_cpcoa[shapes_cpcoa$group %in% points_cpcoa$Compartment, ]
-points_cpcoa$Compartment <- factor(points_cpcoa$Compartment, levels=shapes_cpcoa$group)
-print(dim(points_cpcoa))
-# plot CPCo 1 and 2
-
-p <- ggplot(points_cpcoa, aes(x=x, y=y, color=nodulation, shape=Compartment)) +
-     geom_point(alpha=pcoa_alpha, size=pcoa_size) +
-     scale_colour_manual(values=as.character(colors_cpcoa$color)) +
-     scale_shape_manual(values=shapes_cpcoa$shape) +
-     labs(x=paste("CPCoA 1 (", format(100 * eig[1] / sum(eig), digits=4), "%)", sep=""),
-          y=paste("CPCoA 2 (", format(100 * eig[2] / sum(eig), digits=4), "%)", sep="")) +
-     ggtitle(paste(format(100 * variance, digits=3), " % of variance; P=", format(p.val, digits=2), sep="")) +
-     main_theme +
-     theme(legend.position="none")
-
-ggsave(paste(figures.dir, "AtLj_NC_CPCoA.pdf", sep=""), p, width=pcoa_width, height=pcoa_height)
-
 ### shannon index
 
 index <- design_subset
-index$shannon <- diversity(otu_table_subset, index="shannon", MARGIN=2)
+index$shannon <- diversity(otu_table_raref_subset, index="shannon", MARGIN=2)
 index$Host.Species <- factor(index$Host.Species, levels=colors$group)
 
 # reorder boxplots
 
 index$Host.Species <- factor(index$Host.Species, levels=colors$group)
 
-p <- ggplot(index, aes(x=Host.Species, y=shannon, color=Host.Species)) +
+p <- ggplot(index, aes(x=Host.Species, y=shannon, color=Host.Species, shape=Compartment)) +
             geom_boxplot(alpha=1, outlier.size=0, size=boxplot_size, width=boxplot_width, fill="transparent") +
             geom_jitter(position=position_jitterdodge(1.5), size=boxplot_jitter_size, alpha=shannon_alpha) +
             scale_colour_manual(values=as.character(colors$color)) +
@@ -137,5 +85,5 @@ p <- ggplot(index, aes(x=Host.Species, y=shannon, color=Host.Species)) +
             ggtitle("Shannon diversity") +
             main_theme
 
-ggsave(paste(figures.dir, "AtLj_NC_shannon.pdf", sep=""), p, width=shannon_width, height=shannon_height)
+ggsave(paste(figures.dir, "LjAt_NC_shannon.pdf", sep=""), p, width=shannon_width, height=shannon_height)
 

@@ -14,18 +14,13 @@ library("vegan")
 
 source("plotting_functions.R")
 source("plotting_parameters.R")
-
-# directories
-
-results.dir <- paste("/project_folder/LjAt_SC/", run, "/", sep="")
-data.dir <- "/project_folder/LjAt_SC/data/"
-figures.dir <- "/project_folder/figures/"
+source("paths.R")
 
 # files
 
 design.file <- paste(data.dir, run, "_design.txt", sep="")
-otu_table.file <- paste(results.dir, "otu_table.txt", sep="")
-otu_table_unfiltered.file <- paste(results.dir, "otu_table_unfiltered.txt", sep="")
+otu_table.file <- paste(results.dir, run, "_otu_table.txt", sep="")
+otu_table_unfiltered.file <- paste(results.dir, run, "_otu_table_unfiltered.txt", sep="")
 taxonomy.file <- paste(data.dir, run, "_taxonomy.txt", sep="")
 
 # load data
@@ -73,8 +68,8 @@ design$at_strains_ra <- colSums(otu_table[rownames(otu_table) %in% at_strains, ]
 
 # subset samples of interest
  
-idx <- design$genotype %in% c("col0", "gifu", "nfr5", "none", "soil") &
-       design$compartment %in% c("root") &
+idx <- design$genotype %in% c("col0", "gifu", "nfr5", "Atbbc", "Atfls2", "Ljfls2", "none", "soil", "MN47", "Lc", "wood", "cyp79b2b3", "deps") &
+       design$compartment %in% c("root", "droplet") &
        TRUE
 
 design <- design[idx, ]
